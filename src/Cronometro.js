@@ -1,18 +1,17 @@
 import React from 'react';
 import Contador from './Contador'
 import Botao from './Botao'
-import LabelRelogio from './LabelRelogio'
-import './App.css';
+import LabelCronometro from './LabelCronometro'
 
-class App extends React.Component {
+class Cronometro extends React.Component {
   constructor(props){
     super(props);
     this.state={
       segundos: 0,
       minutos: 0,
       stop: false,
-      nameStop: "Stop",
-      name: "Relógio", 
+      nameStop: "Parar",
+      name: "Cronomêtro", 
       parcial: ""
     };
   }
@@ -23,8 +22,8 @@ class App extends React.Component {
    }
   
   parcial(){
-    let p = this.state.minutos+ ":"+ this.state.segundos + "\n\n"
-    this.state.parcial = this.state.parcial + p
+    let p = this.state.minutos+ "m:"+ this.state.segundos + "\n\n"
+    this.state.parcial = this.state.parcial+"\nP "+p+"s"
   }
   
   pararTempo(){
@@ -32,9 +31,9 @@ class App extends React.Component {
         stop: !this.state.stop 
       })
     if (this.state.stop)
-      this.state.nameStop = "Stop"
+      this.state.nameStop = "Parar"
     else
-      this.state.nameStop = "Start"
+      this.state.nameStop = "Continuar"
   }
 
   incrementar () {
@@ -72,13 +71,22 @@ class App extends React.Component {
 
     return (
       <div>
-        
-        <Contador minutos={this.state.minutos} segundos={this.state.segundos} />
-        <LabelRelogio name={this.state.name} />
-        <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
-        <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
-        <Botao onClick={() => this.parcial()} label={"Parcial"} />
-        <LabelRelogio name={this.state.parcial} />
+        <div class="container">
+          <div class="justify-content-center d-flex mt-3">
+            <LabelCronometro name={this.state.name} />
+          </div>
+          <div class="justify-content-center d-flex mb-2">
+            <Contador minutos={this.state.minutos} segundos={this.state.segundos} />
+          </div>
+          <div class="justify-content-center d-flex mb-3">
+            <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
+            <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
+            <Botao onClick={() => this.parcial()} label={"Parcial"} />
+          </div>
+          <div class="justify-content-center text-center">
+            <LabelCronometro name={this.state.parcial} />
+          </div>
+        </div>
       </div>
     );
   }

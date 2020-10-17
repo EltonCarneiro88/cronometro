@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Cronometro from './Cronometro';
+import Screen_Cronometro from './Screen_Cronometro';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+			<Switch>
+				<Route path="/" component={Screen_Cronometro} />
+			</Switch>
+		</BrowserRouter>
+    <Cronometro />
   </React.StrictMode>,
   document.getElementById('root')
 );
