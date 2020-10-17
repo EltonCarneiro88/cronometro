@@ -3,6 +3,7 @@ import Contador from './Contador'
 import Botao from './Botao'
 import LabelCronometro from './LabelCronometro'
 
+
 class Cronometro extends React.Component {
   constructor(props){
     super(props);
@@ -11,19 +12,29 @@ class Cronometro extends React.Component {
       minutos: 0,
       stop: false,
       nameStop: "Parar",
-      name: "Cronomêtro", 
-      parcial: ""
-    };
+      name: "Cronômetro", 
+      parcial: "",
+	  fimMinuto: "",
+      fimSegundo: ""
+    }
   }
    zerarCronometro() {
-      this.state.segundos = -1
+      this.state.segundos = 0
       this.state.minutos = 0
       this.state.parcial = ""
+	  this.state.fimMinuto = ""
+      this.state.fimSegundo = ""
    }
   
   parcial(){
-    let p = this.state.minutos+ "m:"+ this.state.segundos + "\n\n"
-    this.state.parcial = this.state.parcial+"\nP "+p+"s"
+    let p = this.state.minutos+ "m:"+ this.state.segundos
+	let diferencaMinuto = this.state.minutos - this.state.fimMinuto
+    let diferencaSegundo = this.state.segundos - this.state.fimSegundo
+	this.setState({ 
+		fimMinuto: this.state.minutos,
+		fimSegundo: this.state.segundos,
+		parcial: this.state.parcial = this.state.parcial+"\nP "+p+"s"+" D "+diferencaMinuto+"m"+":"+diferencaSegundo+"s"
+	})
   }
   
   pararTempo(){
@@ -40,7 +51,7 @@ class Cronometro extends React.Component {
     if (this.state.stop === false){
       this.setState(
          function (state, props) {
-          if (state.segundos >= 5){
+          if (state.segundos >= 59){
             this.zerar();
             this.incrementarMinuto(state);
           }  
@@ -51,7 +62,7 @@ class Cronometro extends React.Component {
   
   incrementarMinuto (state) {
     this.setState(() => { 
-      return {minutos: state.minutos +1}
+      return {minutos: this.state.minutos +1}
     })
   };
   
@@ -66,28 +77,25 @@ class Cronometro extends React.Component {
       () => this.incrementar(), 1000)
   }
   
-
   render(){
 
     return (
-      <div>
-        <div class="container">
-          <div class="justify-content-center d-flex mt-3">
-            <LabelCronometro name={this.state.name} />
-          </div>
-          <div class="justify-content-center d-flex mb-2">
-            <Contador minutos={this.state.minutos} segundos={this.state.segundos} />
-          </div>
-          <div class="justify-content-center d-flex mb-3">
-            <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
-            <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
-            <Botao onClick={() => this.parcial()} label={"Parcial"} />
-          </div>
-          <div class="justify-content-center text-center">
-            <LabelCronometro name={this.state.parcial} />
-          </div>
-        </div>
-      </div>
+		<div>
+			<div class="justify-content-center d-flex mt-3">
+				<LabelCronometro name={this.state.name} />
+			</div>
+			<div class="justify-content-center d-flex mb-2">
+				<Contador minutos={this.state.minutos} segundos={this.state.segundos} />
+			</div>
+			<div class="justify-content-center d-flex mb-3">
+				<Botao variant="primary" onClick={() => this.zerarCronometro()} label={"Zerar"} />
+				<Botao variant="primary" onClick={() => this.pararTempo()} label={this.state.nameStop} />
+				<Botao variant="primary" onClick={() => this.parcial()} label={"Parcial"} />
+				</div>
+			<div class="pos_parcial">
+				<LabelCronometro name={this.state.parcial} />
+			</div>
+		</div>
     );
   }
 }
