@@ -92,4 +92,4 @@ class Cronometro extends React.Component {
   }
 }
 
-export default App;
+export default Cronometro;
