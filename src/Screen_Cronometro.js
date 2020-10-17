@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Cronometro from './Cronometro';
 import {Navbar, Nav} from 'react-bootstrap';
 
 function Screen_Cronometro(){
