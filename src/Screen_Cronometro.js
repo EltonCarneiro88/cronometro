@@ -6,13 +6,14 @@ function Screen_Cronometro(){
   return (
     <div>
 		<Navbar bg="primary" variant="dark">
-			<Navbar.Brand href="/">Cronomêtro Online</Navbar.Brand>
+			<Navbar.Brand href="/">Cronômetro Online</Navbar.Brand>
 			<Nav className="mr-auto">
-				<Nav.Link href="/Cronometro">Cronômetro</Nav.Link>
-				<Nav.Link href="/Relogio">Relógio</Nav.Link>
+				<Nav.Link href="/">Cronômetro</Nav.Link>
+				<Nav.Link href="/relogio">Relógio</Nav.Link>
 				<Nav.Link href="/temporizador">Temporizador</Nav.Link>
 			</Nav>
 		</Navbar>
+		<Cronometro/>
     </div>
   );
 }
