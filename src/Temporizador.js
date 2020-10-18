@@ -1,6 +1,8 @@
 import React from 'react'
 import Botao from './Botao'
 import LabelTemporizador from './LabelTemporizador'
+import {Card} from 'react-bootstrap';
+
 
 class Temporizador extends React.Component{
 
@@ -73,13 +75,17 @@ class Temporizador extends React.Component{
 					<LabelTemporizador name={this.state.name} />
 				</div>
 				<div class="justify-content-center d-flex">
-					<h1 class="mb-3">{this.state.minutos}:{this.state.segundos}</h1>
+					<h1 class="mb-4">{this.state.minutos}:{this.state.segundos}</h1>
 				</div>
 				{isOn
 				?null
 				:
-					<div class="text-center mb-3">
-						<h3 class="mb-4">Informe o tempo</h3>
+					<div class="text-center mb-3 justify-content-center d-flex">
+						<Card class="mb-4" className="text-center" border="primary">
+							<Card.Header class="bg-primary text-white">
+								<h3>Informe o tempo</h3>
+							</Card.Header>
+						<Card.Body>
 						<form>
 							<label>Minutos:
 								<input type="number" name="minutos" onChange={this.handleInputChange} />
@@ -90,6 +96,8 @@ class Temporizador extends React.Component{
 								<input type="number" name="segundos" onChange={this.handleInputChange} />
 							</label>
 						</form>
+							</Card.Body>
+						</Card>
 					</div>
 				}
 				<div class="justify-content-center d-flex">
